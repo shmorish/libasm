@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-test:
+  build-test-ubuntu:
     runs-on: ubuntu-latest
     
     steps:
@@ -19,13 +19,13 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential nasm
         
-    - name: Build libasm
+    - name: Build libasm (Linux)
       run: |
-        make all
+        make AS="as --64" ASFLAGS="" all
         
-    - name: Build test executable
+    - name: Build test executable (Linux)
       run: |
-        make test
+        make CC="gcc" CFLAGS="-Wall -Wextra -Werror -m64" test
         
     - name: Run tests
       run: |
