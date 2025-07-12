@@ -1,8 +1,8 @@
-.section __TEXT,__text,regular,pure_instructions
-.globl _ft_write
+.section .text
+.globl ft_write
 
-_ft_write:
-    mov $0x2000004, %rax
+ft_write:
+    mov $1, %rax
     syscall
     jc Lerror
     ret
@@ -10,7 +10,7 @@ _ft_write:
 Lerror:
     neg %rax
     mov %rax, %rdi
-    call ___error
+    call __errno_location@PLT
     mov %edi, (%rax)
     mov $-1, %rax
     ret

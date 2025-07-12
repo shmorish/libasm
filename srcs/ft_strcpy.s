@@ -1,7 +1,7 @@
-.section __TEXT,__text,regular,pure_instructions
-.globl _ft_strcpy
+.section .text
+.globl ft_strcpy
 
-_ft_strcpy:
+ft_strcpy:
     mov %rdi, %rax
     test %rdi, %rdi
     jz Ldone

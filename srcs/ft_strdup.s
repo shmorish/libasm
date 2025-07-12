@@ -1,7 +1,7 @@
-.section __TEXT,__text,regular,pure_instructions
-.globl _ft_strdup
+.section .text
+.globl ft_strdup
 
-_ft_strdup:
+ft_strdup:
     test %rdi, %rdi
     jz Lnull_return
     
@@ -9,11 +9,11 @@ _ft_strdup:
     mov %rsp, %rbp
     push %rdi
     
-    call _ft_strlen
+    call ft_strlen
     inc %rax
     mov %rax, %rdi
     
-    call _malloc
+    call malloc@PLT
     test %rax, %rax
     jz Lmalloc_failed
     
@@ -21,7 +21,7 @@ _ft_strdup:
     pop %rsi
     push %rdi
     
-    call _ft_strcpy
+    call ft_strcpy
     pop %rax
     
     leave

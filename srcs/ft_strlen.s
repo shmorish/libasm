@@ -1,7 +1,7 @@
-.section __TEXT,__text,regular,pure_instructions
-.globl _ft_strlen
+.section .text
+.globl ft_strlen
 
-_ft_strlen:
+ft_strlen:
     xor %rax, %rax
     test %rdi, %rdi
     jz Ldone

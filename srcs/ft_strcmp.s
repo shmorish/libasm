@@ -1,7 +1,7 @@
-.section __TEXT,__text,regular,pure_instructions
-.globl _ft_strcmp
+.section .text
+.globl ft_strcmp
 
-_ft_strcmp:
+ft_strcmp:
     test %rdi, %rdi
     jz Lnull_check
     test %rsi, %rsi
