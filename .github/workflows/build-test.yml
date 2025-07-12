@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-test-ubuntu:
+  build-test:
     runs-on: ubuntu-latest
     
     steps:
@@ -17,15 +17,15 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential nasm
+        sudo apt-get install -y build-essential
         
-    - name: Build libasm (Linux)
+    - name: Build libasm
       run: |
-        make AS="as --64" ASFLAGS="" all
+        make all
         
-    - name: Build test executable (Linux)
+    - name: Build test executable
       run: |
-        make CC="gcc" CFLAGS="-Wall -Wextra -Werror -m64" test
+        make test
         
     - name: Run tests
       run: |
