@@ -2,35 +2,37 @@
 .globl _ft_strdup
 
 _ft_strdup:
-    cbz x0, Lnull_return
+    test %rdi, %rdi
+    jz Lnull_return
     
-    stp x29, x30, [sp, #-16]!
-    mov x29, sp
-    str x0, [sp, #-16]!
+    push %rbp
+    mov %rsp, %rbp
+    push %rdi
     
-    bl _ft_strlen
-    add x0, x0, #1
+    call _ft_strlen
+    inc %rax
+    mov %rax, %rdi
     
-    bl _malloc
-    cbz x0, Lmalloc_failed
+    call _malloc
+    test %rax, %rax
+    jz Lmalloc_failed
     
-    mov x1, x0
-    ldr x0, [sp], #16
-    str x1, [sp, #-16]!
-    mov x1, x0
-    ldr x0, [sp], #16
+    mov %rax, %rdi
+    pop %rsi
+    push %rdi
     
-    bl _ft_strcpy
+    call _ft_strcpy
+    pop %rax
     
-    ldp x29, x30, [sp], #16
+    leave
     ret
 
 Lnull_return:
-    mov x0, #0
+    xor %rax, %rax
     ret
 
 Lmalloc_failed:
-    add sp, sp, #16
-    ldp x29, x30, [sp], #16
-    mov x0, #0
+    add $8, %rsp
+    leave
+    xor %rax, %rax
     ret

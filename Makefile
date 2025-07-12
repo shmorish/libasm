@@ -25,13 +25,13 @@ SRCS = ft_strlen.s \
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.s=.o))
 
 AS = as
-ASFLAGS = -arch arm64
+ASFLAGS = -arch x86_64
 
 AR = ar
 ARFLAGS = rcs
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -arch x86_64
 
 all: $(NAME)
 

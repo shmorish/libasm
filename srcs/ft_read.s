@@ -2,15 +2,15 @@
 .globl _ft_read
 
 _ft_read:
-    mov x16, #3
-    svc #0x80
-    bcs Lerror
+    mov $0x2000003, %rax
+    syscall
+    jc Lerror
     ret
 
 Lerror:
-    neg x0, x0
-    mov x1, x0
-    bl ___error
-    str w1, [x0]
-    mov x0, #-1
+    neg %rax
+    mov %rax, %rdi
+    call ___error
+    mov %edi, (%rax)
+    mov $-1, %rax
     ret

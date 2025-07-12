@@ -1,36 +1,40 @@
 .section __TEXT,__text,regular,pure_instructions
 .globl _ft_strcmp
-.p2align 2
 
 _ft_strcmp:
-    mov x2, #0
-    cbz x0, Lnull_check
-    cbz x1, Lnull_check
+    test %rdi, %rdi
+    jz Lnull_check
+    test %rsi, %rsi
+    jz Lnull_check
 
 Lloop:
-    ldrb w3, [x0, x2]
-    ldrb w4, [x1, x2]
-    cmp w3, w4
-    bne Ldifferent
-    cbz w3, Lequal
-    add x2, x2, #1
-    b Lloop
+    movb (%rdi), %al
+    movb (%rsi), %cl
+    cmp %al, %cl
+    jne Ldifferent
+    test %al, %al
+    jz Lequal
+    inc %rdi
+    inc %rsi
+    jmp Lloop
 
 Ldifferent:
-    sub w0, w3, w4
-    sxtw x0, w0
+    movzbl %al, %eax
+    movzbl %cl, %ecx
+    sub %ecx, %eax
     ret
 
 Lequal:
-    mov x0, #0
+    xor %eax, %eax
     ret
 
 Lnull_check:
-    cmp x0, x1
-    beq Lequal
-    cbz x0, Ls1_null
-    mov x0, #1
+    cmp %rdi, %rsi
+    je Lequal
+    test %rdi, %rdi
+    jz Ls1_null
+    mov $1, %eax
     ret
 Ls1_null:
-    mov x0, #-1
+    mov $-1, %eax
     ret
