@@ -1,0 +1,8 @@
+{
+  "name": "libasm x86 Development",
+  "image": "ubuntu:22.04",
+  "runArgs": [
+    "--platform=linux/amd64"
+  ],
+  "postCreateCommand": "apt-get update && apt-get install -y build-essential nasm gdb valgrind git"
+}
