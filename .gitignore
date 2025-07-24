@@ -1,0 +1,8 @@
+*
+!.devcontainer/
+!.github/
+!srcs/
+!.gitignore
+!libasm.h
+!main.c
+!Makefile
